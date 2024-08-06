@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import { Link as LinkURL } from 'react-router-dom';
 
 function Header(props) {
   const { sections, title } = props;
@@ -14,11 +15,13 @@ function Header(props) {
     <React.Fragment>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Button size="small">
-          Icon
+          <Typography variant='h6'>
+            Icon
+          </Typography>
         </Button>
         <Typography
           component="h2"
-          variant="h5"
+          variant="h4"
           color="inherit"
           align="center"
           noWrap
@@ -26,9 +29,13 @@ function Header(props) {
         >
           {title}
         </Typography>
-        <Button variant="outlined" size="small">
-          Sign up
-        </Button>
+        <LinkURL to='/login'>
+          <Button variant="outlined" size="small">
+              <Typography variant='h6'>
+                Sign in
+              </Typography >
+          </Button>
+        </LinkURL>
       </Toolbar>
       <Toolbar
         component="nav"
@@ -36,20 +43,24 @@ function Header(props) {
         sx={{ justifyContent: 'space-between', overflowX: 'auto' }}
       >
         {sections.map((section) => (
-          <Link
-            color="inherit"
-            noWrap
-            key={section.title}
-            // variant="body2"
-            href={section.url}
-            sx={{ p: 1, flexShrink: 0 }}
-          >
-            <Button
-              variant='large'
+          <LinkURL to={section.url}>
+            <Link
+              color="inherit"
+              noWrap
+              key={section.title}
+              // variant="body2"  
+              // href={section.url}
+              sx={{ p: 1, flexShrink: 0 }}
             >
-              {section.title}
-            </Button>
-          </Link>
+              <Button
+                variant='large'
+              >
+                <Typography variant='h5' color={'black'}>
+                  {section.title}
+                </Typography>
+              </Button>
+            </Link>
+          </LinkURL>
         ))}
       </Toolbar>
     </React.Fragment>

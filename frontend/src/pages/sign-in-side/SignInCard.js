@@ -9,11 +9,11 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-
 import { styled } from '@mui/material/styles';
-
 import ForgotPassword from './ForgotPassword';
 import { SitemarkIcon } from './CustomIcons';
+import { login } from '../../auth/loginAuth';
+import { useNavigate } from 'react-router-dom';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -40,6 +40,7 @@ export default function SignInCard() {
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -49,23 +50,9 @@ export default function SignInCard() {
     setOpen(false);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
-  const userLogin = async (url, token) => {
-    
-  }
-
   const validateInputs = () => {
     const email = document.getElementById('email');
     const password = document.getElementById('password');
-
     let isValid = true;
 
     if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
@@ -87,6 +74,21 @@ export default function SignInCard() {
     }
 
     return isValid;
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    let valid = validateInputs();
+    const data = new FormData(event.currentTarget);
+    if (valid === true) {
+      // const isSignedIn = login(data.get('email'), data.get('password'));
+      // if (!isSignedIn) {
+      //   alert("Cannot verify email or password!");
+      // }
+      // else {
+      //   navigate("/home")
+      // }
+    }
   };
 
   return (
@@ -157,7 +159,7 @@ export default function SignInCard() {
           label="Remember me"
         />
         <ForgotPassword open={open} handleClose={handleClose} />
-        <Button type="submit" fullWidth variant="contained" onClick={validateInputs}>
+        <Button type="submit" fullWidth variant="contained">
           Sign in
         </Button>
         <Link variant="body2" sx={{ alignSelf: 'center' }}>

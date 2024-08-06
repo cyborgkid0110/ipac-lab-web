@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import Blog from './pages/blog/Blog';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Header from './components/Header';
@@ -11,13 +11,14 @@ import AppTheme from './theme';
 import { useState } from 'react';
 import SignUp from './pages/sign-up/SignUp';
 
+export const BackendHost = process.env.REACT_APP_BACKEND_URL
 const sections = [
-  { title: 'Home', url: '#' },
-  { title: 'About', url: '#' },
-  { title: 'Member', url: '#' },
-  { title: 'Publication', url: '#' },
-  { title: 'Activities', url: '#' },
-  { title: 'Registration', url: '#' },
+  { title: 'Home', url: '/home' },
+  { title: 'About', url: '/about' },
+  { title: 'Member', url: '/member' },
+  { title: 'Publication', url: '/publication' },
+  { title: 'Activities', url: '/activities' },
+  { title: 'Registration', url: '/registration' },
 ];
 
 function setToken(userToken) {
@@ -27,43 +28,55 @@ function setToken(userToken) {
 function getToken() {
 }
 
+const ConditionalHeaderFooter = ({ title, sections, children }) => {
+  const location = useLocation();
+  
+  // Chỉ render Header và Footer nếu không phải trang /login
+  if (location.pathname !== '/login') {
+    return (
+      <>
+        <Header title={title} sections={sections} />
+          {children}
+        <Footer />
+      </>
+    );
+  }
+  return <>{children}</>;
+};
+
 function App() {
   const [mode, setMode] = useState('light');
   const defaultTheme = createTheme(AppTheme(mode));
   const token = getToken();
 
-  if(!token) {
-    return (
-      <ThemeProvider theme={defaultTheme}>
-        <CssBaseline />
-        {/* <SignInSide setToken={setToken} /> */}
-        <SignUp />
-      </ThemeProvider>
-    )
-  }
+  // if(!token) {
+  //   return (
+  //     <ThemeProvider theme={defaultTheme}>
+  //       <CssBaseline />
+  //       {/* <SignInSide setToken={setToken} /> */}
+  //       <SignInSide />
+  //     </ThemeProvider>
+  //   )
+  // }
   
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <Container maxWidth="xl">
-        <Header title="IPAC Lab" sections={sections} />
-        <Router>
+      <Container maxWidth="xl"> 
+      <Router>
+        <ConditionalHeaderFooter title="IPAC Lab" sections={sections}>
           <Routes>
-            <Route path="" element={<Blog />} />
+            <Route path="/" element={<Blog />} />
             <Route path="/home" element={<Blog />} />
+            <Route path="/login" element={<SignInSide setToken={setToken} />} />
             {/* <Route path="/about" element={<Blog />} /> */}
             {/* <Route path="/publication" element={<Blog />} /> */}
-            {/* <Route path="/activities" element={<Blog />} /> */}
+            {/* <Route path="/activities" el ement={<Blog />} /> */}
             {/* <Route path="/member" element={<Blog />} /> */}
-            {/* <Route path="/login" element={<Blog />} /> */}
           </Routes>
-        </Router>
-          
-        <Footer
-          title="Footer"
-          description="Something here to give the footer a purpose!"
-        />
-      </Container>
+        </ConditionalHeaderFooter>
+      </Router>
+        </Container>
     </ThemeProvider>
   );
 }
