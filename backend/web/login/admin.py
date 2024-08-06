@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Activity,Publication,Technology,MemberLab
+
+admin.site.register(Activity)
+admin.site.register(Publication)
+admin.site.register(Technology)
+admin.site.register(MemberLab)
