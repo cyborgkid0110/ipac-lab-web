@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { Card as MuiCard } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
@@ -9,30 +8,12 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
 import ForgotPassword from './ForgotPassword';
 import { SitemarkIcon } from './CustomIcons';
 import { login } from '../../auth/loginAuth';
 import { useNavigate } from 'react-router-dom';
-
-const Card = styled(MuiCard)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignSelf: 'center',
-  gap: theme.spacing(4),
-  width: '100%',
-  padding: theme.spacing(2),
-  boxShadow:
-    'hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px, hsla(220, 30%, 5%, 0.05) 0px 0px 0px 1px',
-  [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(4),
-    width: '450px',
-  },
-  ...theme.applyStyles('dark', {
-    boxShadow:
-      'hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px, hsla(220, 30%, 5%, 0.05) 0px 0px 0px 1px',
-  }),
-}));
+import { Link as LinkURL } from 'react-router-dom';
+import Card from '../../components/Card';
 
 export default function SignInCard() {
   const [emailError, setEmailError] = React.useState(false);
@@ -66,7 +47,7 @@ export default function SignInCard() {
 
     if (!password.value || password.value.length < 6) {
       setPasswordError(true);
-      setPasswordErrorMessage('Password must be at least 6 characters long.');
+      setPasswordErrorMessage('Password must be at least 8 characters long.');
       isValid = false;
     } else {
       setPasswordError(false);
@@ -130,14 +111,16 @@ export default function SignInCard() {
         <FormControl>
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <FormLabel htmlFor="password">Password</FormLabel>
-            <Link
-              component="button"
-              onClick={handleClickOpen}
-              variant="body2"
-              sx={{ alignSelf: 'baseline' }}
-            >
-              Forgot your password?
-            </Link>
+            <LinkURL to='/reset-pw' style={{textDecoration: 'none'}}>
+              <Link
+                component="button"
+                onClick={handleClickOpen}
+                variant="body2"
+                sx={{ alignSelf: 'baseline' }}
+              >
+                Forgot your password?
+              </Link>
+            </LinkURL>
           </Box>
           <TextField
             error={passwordError}
@@ -162,9 +145,11 @@ export default function SignInCard() {
         <Button type="submit" fullWidth variant="contained">
           Sign in
         </Button>
-        <Link variant="body2" sx={{ alignSelf: 'center' }}>
-          Don&apos;t have an account? Sign up
-        </Link>
+        <LinkURL to="/signup" style={{alignSelf: 'center', textDecoration: 'none'}}>
+          <Link variant='body2' sx={{alignSelf: 'center'}}>
+            Don&apos;t have an account? Sign up
+          </Link>
+        </LinkURL> 
       </Box>
     </Card>
   );

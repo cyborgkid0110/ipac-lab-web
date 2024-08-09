@@ -10,8 +10,9 @@ import { Container } from '@mui/material';
 import AppTheme from './theme';
 import { useState } from 'react';
 import SignUp from './pages/sign-up/SignUp';
+import ResetPassword from './pages/reset-pw/ResetPassword';
+import ChangePassword from './pages/change-pw/ChangePassword';
 
-export const BackendHost = process.env.REACT_APP_BACKEND_URL
 const sections = [
   { title: 'Home', url: '/home' },
   { title: 'About', url: '/about' },
@@ -32,7 +33,8 @@ const ConditionalHeaderFooter = ({ title, sections, children }) => {
   const location = useLocation();
   
   // Chỉ render Header và Footer nếu không phải trang /login
-  if (location.pathname !== '/login') {
+  if (location.pathname !== '/login' && location.pathname !== '/signup' && 
+    location.pathname !== '/reset-pw' && location.pathname !== '/change-pw') {
     return (
       <>
         <Header title={title} sections={sections} />
@@ -60,15 +62,18 @@ function App() {
   // }
   
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={defaultTheme}>  
       <CssBaseline />
       <Container maxWidth="xl"> 
       <Router>
         <ConditionalHeaderFooter title="IPAC Lab" sections={sections}>
           <Routes>
-            <Route path="/" element={<Blog />} />
+            <Route path="" element={<Blog />} />
             <Route path="/home" element={<Blog />} />
             <Route path="/login" element={<SignInSide setToken={setToken} />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/reset-pw" element={<ResetPassword />} />
+            <Route path="/change-pw" element={<ChangePassword />} />
             {/* <Route path="/about" element={<Blog />} /> */}
             {/* <Route path="/publication" element={<Blog />} /> */}
             {/* <Route path="/activities" el ement={<Blog />} /> */}
