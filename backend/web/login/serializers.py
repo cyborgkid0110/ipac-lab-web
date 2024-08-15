@@ -11,6 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
     confirm_pass = serializers.CharField(required = True )
     nick_name = serializers.CharField(required = True)
     username = serializers.EmailField(required = True)
+    
     class Meta:
         model = User
         fields = ['username', 'password','confirm_pass', 'nick_name']

@@ -16,12 +16,13 @@ User = get_user_model()
 
 @api_view(['POST'])
 def logout(request):
+
     try:
         token = RefreshToken(request.data['refresh'])
         token.blacklist()
         return Response({"message":"Logout successful"}, status=status.HTTP_200_OK)
     except:
-        return Response({"message":"Try again!"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"message":"Try logout again!"}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 def signup(request):
