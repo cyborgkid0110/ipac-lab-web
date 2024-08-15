@@ -1,8 +1,7 @@
 from django.contrib import admin
+from .models import Publication, Technology, Activities, Memberlab
 
-from .models import Activity,Publication,Technology,MemberLab
-
-admin.site.register(Activity)
 admin.site.register(Publication)
 admin.site.register(Technology)
-admin.site.register(MemberLab)
+admin.site.register(Activities)
+admin.site.register(Memberlab)

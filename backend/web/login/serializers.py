@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import get_user_model
+from .models import Publication, Activities, Technology, Memberlab
+from rest_framework.reverse import reverse
 
 User = get_user_model()
 
@@ -46,7 +48,6 @@ class ChangePassWord(serializers.Serializer):
     confirm_pass = serializers.CharField(required = True)
 
 
-
 class ResetPassWord(serializers.Serializer):
     
     username = serializers.CharField(required=True)
@@ -60,3 +61,105 @@ class ResetPassWord(serializers.Serializer):
         
         return data
 
+
+class Publicationserializer(serializers.ModelSerializer):
+
+    url = serializers.SerializerMethodField(read_only=True)
+    update_url = serializers.SerializerMethodField(read_only=True)
+    delete_url = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Publication
+        fields =  ['url', 'update_url', 'delete_url', 'id', 'author', 'year', 'title', 'content']
+    
+    def get_url(self, obj):
+
+        request = self.context.get('request')
+        if request is None:
+            return None
+        return reverse('detail_publication', kwargs = {'pk' : obj.pk}, request = request)
+    
+    def get_update_url(self, obj):
+        
+        request = self.context.get('request')
+        if request is None:
+            return None
+        return reverse('update_publication', kwargs = {'pk' : obj.pk}, request = request)
+    
+    def get_delete_url(self, obj):
+        
+        request = self.context.get('request')
+        if request is None:
+            return None
+        return reverse('delete_publication', kwargs = {'pk' : obj.pk}, request = request)
+
+
+class Technologyserializer(serializers.ModelSerializer):
+    
+    update_url = serializers.SerializerMethodField(read_only=True)
+    delete_url = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Technology
+        fields =  ['update_url', 'delete_url', 'id', 'name', 'content']
+    
+    def get_update_url(self, obj):
+        
+        request = self.context.get('request')
+        if request is None:
+            return None
+        return reverse('update_technology', kwargs = {'pk' : obj.pk}, request = request)
+    
+    def get_delete_url(self, obj):
+        
+        request = self.context.get('request')
+        if request is None:
+            return None
+        return reverse('delete_technology', kwargs = {'pk' : obj.pk}, request = request)
+
+
+class Activitiesserializer(serializers.ModelSerializer):
+    
+    update_url = serializers.SerializerMethodField(read_only=True)
+    delete_url = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Activities
+        fields =  ['update_url', 'delete_url', 'id', 'time', 'content']
+    
+    def get_update_url(self, obj):
+        
+        request = self.context.get('request')
+        if request is None:
+            return None
+        return reverse('update_activities', kwargs = {'pk' : obj.pk}, request = request)
+    
+    def get_delete_url(self, obj):
+        
+        request = self.context.get('request')
+        if request is None:
+            return None
+        return reverse('delete_activities', kwargs = {'pk' : obj.pk}, request = request)
+    
+class Memberlabserializer(serializers.ModelSerializer):
+    
+    update_url = serializers.SerializerMethodField(read_only=True)
+    delete_url = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Memberlab
+        fields =  ['update_url', 'delete_url', 'id', 'username', 'course', 'majors', 'research_topic', 'image']
+    
+    def get_update_url(self, obj):
+        
+        request = self.context.get('request')
+        if request is None:
+            return None
+        return reverse('update_member', kwargs = {'pk' : obj.pk}, request = request)
+    
+    def get_delete_url(self, obj):
+        
+        request = self.context.get('request')
+        if request is None:
+            return None
+        return reverse('delete_member', kwargs = {'pk' : obj.pk}, request = request)
