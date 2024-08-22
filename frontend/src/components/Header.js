@@ -7,6 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { Link as LinkURL } from 'react-router-dom';
+import Profile from './Profile';
 
 function Header(props) {
   const { sections, title } = props;
@@ -29,13 +30,14 @@ function Header(props) {
         >
           {title}
         </Typography>
-        <LinkURL to='/login'>
+        {/* <LinkURL to='/login'>
           <Button variant="outlined" size="small">
               <Typography variant='h6'>
                 Sign in
               </Typography >
           </Button>
-        </LinkURL>
+        </LinkURL> */}
+        <Profile />
       </Toolbar>
       <Toolbar
         component="nav"
