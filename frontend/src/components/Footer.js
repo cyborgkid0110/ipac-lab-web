@@ -8,6 +8,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import XIcon from '@mui/icons-material/X';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { Divider, Grid, IconButton, Stack } from '@mui/material';
+import NavButton from './NavButton';
 
 function Copyright() {
   return (
@@ -20,7 +21,7 @@ function Copyright() {
     >
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        IPAC Lab
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -32,7 +33,7 @@ function Footer(props) {
   const { description, title } = props;
 
   return (
-    <Box component="footer" sx={{ bgcolor: 'background.paper', py: 6 }}  justifyContent='center' display='flex'>
+    <Box component="footer" sx={{ bgcolor: 'background.paper', py: 6, px: 6 }}  justifyContent='center' display='flex'>
       <Box sx={{ width: '100%', maxWidth: '1296px'}}>
         <Grid container>
           <Grid item xs={12}>
@@ -61,7 +62,10 @@ function Footer(props) {
           </Grid>
           <Grid item xs={12} textAlign='left'>
             <Stack
-              direction="row"
+              sx={{
+                direction: {xs: 'column', md: 'row'},
+                flexDirection: {xs: 'column', md: 'row'}
+              }}
               justifyContent="space-between"
               alignItems="flex-start"
               spacing={2}
@@ -73,9 +77,9 @@ function Footer(props) {
               spacing={2}
              >
               <Typography fontSize='18px' variant='h6'>Learn more</Typography>
-              <Typography variant='h6' style={{ color: 'gray'}}>Publications</Typography>
-              <Typography variant='h6' style={{ color: 'gray'}}>Activities</Typography>
-              <Typography variant='h6' style={{ color: 'gray'}}>Technologies</Typography>
+              <NavButton title='Publications' path='/research' />
+              <NavButton title='Activities' path='/activities' />
+              <NavButton title='Technologies' path='/technology' />
              </Stack>
              <Stack
               direction="column"
@@ -84,8 +88,8 @@ function Footer(props) {
               spacing={2}
              >
               <Typography fontSize='18px' variant='h6'>About</Typography>
-              <Typography variant='h6' style={{ color: 'gray'}}>About IPAC Lab</Typography>
-              <Typography variant='h6' style={{ color: 'gray'}}>Members</Typography>
+              <NavButton title='About IPAC Lab' path='/about' />
+              <NavButton title='Members' path='/members' />
              </Stack>
              <Stack
               direction="column"

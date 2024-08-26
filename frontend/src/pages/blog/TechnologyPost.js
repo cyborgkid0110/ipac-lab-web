@@ -16,7 +16,7 @@ function TechnologyPost(props) {
       <Card sx={{ display: 'flex', flexDirection: 'column', maxHeight: 600 }}>
         <CardMedia
           component="img"
-          sx={{ display: { xs: 'none', sm: 'block' } }}
+          sx={{ display: 'block' }}
           image={post.image}
           alt='pic'
         />

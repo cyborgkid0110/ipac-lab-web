@@ -13,6 +13,7 @@ import post3 from './blog-post.3.md';
 import Banner from './Banner';
 import { Box, Button, Container, Typography } from '@mui/material';
 import TechnologyPost from './TechnologyPost';
+import { useNavigate } from 'react-router-dom';
 
 const mainFeaturedPost = {
   title: 'Title of a longer featured blog post',
@@ -91,6 +92,8 @@ export default function Blog() {
     image: 'https://picsum.photos/1920/1080',
   };
 
+  const navigate = useNavigate();
+
   return (
     <main>
       {/*    */}
@@ -111,7 +114,7 @@ export default function Blog() {
             </Typography>
           </Grid>
           <Grid item xs={6} justifyContent='right' alignContent='center' display='grid'>
-            <Button>
+            <Button onClick={() => navigate('/activities')}>
               <Typography variant='h5' color='primary'>
                 View all posts
               </Typography>
@@ -131,7 +134,7 @@ export default function Blog() {
         <Typography variant='h4' fontWeight='normal' py={1} fontSize='30px' textAlign='center'>Breakthrough research. Transformative products.</Typography>
         <Grid container justifyContent='center'>
           <Button>
-            <Typography variant='h5' color='primary'>
+            <Typography variant='h5' color='primary' onClick={() => navigate('/technology')}>
               View all technologies
             </Typography>
           </Button>

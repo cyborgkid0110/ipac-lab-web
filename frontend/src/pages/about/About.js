@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Box, Button, Container, Divider, Grid, Stack, Typography } from '@mui/material';
 import FeaturedPost from '../blog/FeaturedPost';
 import ImageSlider from '../../components/ImageSlider';
+import PageTitle from '../../components/PageTitle';
+import { useNavigate } from 'react-router-dom';
 
 export default function About() {
   const researchTopics = [
@@ -20,7 +22,9 @@ export default function About() {
       image: 'https://picsum.photos/1632/918',
       description: 'Environmentally friendly agriculture focuses on sustainable farming practices that minimize environmental impact and promote long-term ecological balance.'
     }
-  ]
+  ];
+
+  const navigate = useNavigate();
 
   return (
     <main>
@@ -72,26 +76,26 @@ export default function About() {
           divider={<Divider orientation="vertical" flexItem />}
         >
           <Stack direction="column" justifyContent="flex-start" alignItems="center" spacing={2}>
-            <Button>
+            <Button onClick={() => navigate('/research')}>
               <Typography variant='h5'>Publications</Typography>
             </Button>
             <Typography variant='h2'>100</Typography>
           </Stack>
           <Stack direction="column" justifyContent="flex-start" alignItems="center" spacing={2}>
-            <Button>
+            <Button onClick={() => navigate('/members')}>
               <Typography variant='h5'>Members</Typography>
             </Button>
             <Typography variant='h2'>30+</Typography>
           </Stack>
           <Stack direction="column" justifyContent="flex-start" alignItems="center" spacing={2}>
-            <Button size='inherit ' fullWidth>
+            <Button onClick={() => navigate('/research')}>
               <Typography variant='h5'>Research Areas</Typography>
             </Button>
             <Typography variant='h2'>10</Typography>
           </Stack>
         </Stack>
         <Box my={10} />
-        <Typography variant='h3' textAlign='center'>Research Areas</Typography>
+        <PageTitle title='Research areas' abstract='Discover our research fields of the lab' />
         <Box my={4} />
         <Grid container spacing={10}>
           {researchTopics.map((post, index) => (
@@ -99,6 +103,17 @@ export default function About() {
               <FeaturedPost key={index} post={post} />
             </Grid>
           ))}
+        </Grid>
+        <Box my={3} />  
+        <Grid container justifyContent='center'>
+          <Button color='primary' variant='contained' sx={{
+            fontSize: '18px',
+            padding: 3,
+            borderRadius: 3
+          }}
+          >
+            Load more
+          </Button>
         </Grid>
         <Box my={10} />
         <Typography variant='h3' textAlign='center'>Spotlight</Typography>
