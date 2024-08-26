@@ -168,7 +168,7 @@ const ConditionalRoutes = () => {
 
 function App() {
   return (
-    <Router>
+    <Router basename="/frontend">
       <ConditionalRoutes />
     </Router>
   );

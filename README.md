@@ -1,1 +1,1 @@
-ipac-lab-web
+Web deploy on GitHub: (http://cyborgkid0110.github.io/ipac-lab-web/frontend)
