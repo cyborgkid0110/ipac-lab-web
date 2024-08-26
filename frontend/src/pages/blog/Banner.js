@@ -6,28 +6,36 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 
-function MainFeaturedPost(props) {
+function Banner(props) {
   const { post } = props;
+
+  // const post = {
+  //   title: 'Welcome to IPAC Lab!',
+  //   description:
+  //     "IoT, Power, Actuation and Control Research Group",
+  //   image: 'https://picsum.photos/1920/1080',
+  // };
 
   return (
     <Paper
       sx={{
         position: 'relative',
-        backgroundColor: 'grey.800',
+        backgroundColor: 'rgba(0,0,0,0)',
         color: '#fff',
         mb: 4,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundImage: `url(${post.image})`,
-        height: {xs: 300, md: 450, xl: 600}
+        height: {xs: 300, md: 450, xl: 600},
+        borderRadius: 0
       }}
       style={{
         '--post-image': post.image,
       }}
     >
       {/* Increase the priority of the hero background image */}
-      {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
+      {<img style={{ display: 'none' }} src={post.image} alt='pic' />}
       <Box
         sx={{
           position: 'absolute',
@@ -38,24 +46,32 @@ function MainFeaturedPost(props) {
           backgroundColor: 'rgba(0,0,0,.3)',
         }}
       />
-      <Grid container>
-        <Grid item md={6}>
+      <Grid container height='100%'>
+        <Grid item xs={12}>
           <Box
             sx={{
               position: 'relative',
               p: { xs: 3, md: 6 },
               pr: { md: 0 },
             }}
+            height='100%'
+            textAlign='center'
+            alignContent='center'
           >
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+            <Typography component="h1" variant="h1" color="inherit" gutterBottom
+              sx={{
+                fontSize: {xs: 30, md: 45, xl: 60}
+              }}
+            >
               {post.title}
             </Typography>
-            <Typography variant="h5" color="inherit" sx={{ marginBottom: 2 }}>
+            <Typography variant="h4" color="inherit" sx={{ 
+              marginBottom: 2,
+              fontSize: {xs: 24, md: 30, xl: 36}
+            }}
+            >
               {post.description}
             </Typography>
-            <Link variant="subtitle1" href="#">
-              {post.linkText}
-            </Link>
           </Box>
         </Grid>
       </Grid>
@@ -63,7 +79,7 @@ function MainFeaturedPost(props) {
   );
 }
 
-MainFeaturedPost.propTypes = {
+Banner.propTypes = {
   post: PropTypes.shape({
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
@@ -73,4 +89,4 @@ MainFeaturedPost.propTypes = {
   }).isRequired,
 };
 
-export default MainFeaturedPost;
+export default Banner;

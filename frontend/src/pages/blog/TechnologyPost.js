@@ -1,15 +1,14 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-function FeaturedPost(props) {
+function TechnologyPost(props) {
   const { post } = props;
 
   return (
@@ -17,21 +16,13 @@ function FeaturedPost(props) {
       <Card sx={{ display: 'flex', flexDirection: 'column', maxHeight: 600 }}>
         <CardMedia
           component="img"
-          sx={{ display: 'block' }}
+          sx={{ display: { xs: 'none', sm: 'block' } }}
           image={post.image}
           alt='pic'
         />
         <CardContent sx={{ flex: 1 }}>
           <Typography component="h2" variant="h5">
             {post.title}
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            sx={{
-              color: 'text.secondary',
-            }}
-          >
-            {post.date}
           </Typography>
           <Typography variant="subtitle1" 
             sx={{ 
@@ -46,22 +37,21 @@ function FeaturedPost(props) {
             {post.description}
           </Typography>
           <Box my={4} />
-          <Grid container justifyContent='right'>
+          {/* <Grid container justifyContent='right'>
             <ArrowForwardIcon color='primary' />
-          </Grid>
+          </Grid> */}
         </CardContent>
       </Card>
     </CardActionArea>
   );
 }
 
-FeaturedPost.propTypes = {
+TechnologyPost.propTypes = {
   post: PropTypes.shape({
-    date: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
   }).isRequired,
 };
 
-export default FeaturedPost;
+export default TechnologyPost;

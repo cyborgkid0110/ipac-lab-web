@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import Blog from './pages/blog/Blog';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -26,13 +25,19 @@ import AddTechnology from './pages/dashboard/pages/technology/AddTechnology';
 import AddMember from './pages/dashboard/pages/member/AddMember';
 import Member from './pages/dashboard/pages/member/Member';
 import ModifyArticle from './pages/dashboard/pages/publication/ModifyArticle';
+import About from './pages/about/About';
+import TechnologyPublic from './pages/technology/TechnologyPublic';
+import ResearchPublic from './pages/research/ResearchPublic';
+import ActivitiesPublic from './pages/activity/ActivitiesPublic';
+import MembersPublic from './pages/members/MembersPublic';
 
 const sections = [
   { title: 'Home', url: '/home' },
   { title: 'About', url: '/about' },
-  { title: 'Member', url: '/member' },
-  { title: 'Publication', url: '/publication' },
+  { title: 'Technologies', url: '/technology' },
+  { title: 'Research', url: '/research' },
   { title: 'Activities', url: '/activities' },
+  { title: 'Member', url: '/members' },
   { title: 'Registration', url: '/registration' },
 ];
 
@@ -140,12 +145,17 @@ const ConditionalRoutes = () => {
   return (
     <ThemeProvider theme={defaultTheme}>  
       <CssBaseline />
-      <Container maxWidth='xl'> 
+      <Container maxWidth={checkException(noHeaderFooter, location.pathname) ? 'xl' : '2000px'} style={{padding: 0}}> 
         <ConditionalHeaderFooter title="IPAC Lab" sections={sections} urlPath={location.pathname}>
           <Routes>
             <Route path="" element={<Blog />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/technology" element={<TechnologyPublic />} />
             <Route path="/home" element={<Blog />} />
+            <Route path="/research" element={<ResearchPublic />} />
             <Route path="/login" element={<SignInSide setToken={setToken} />} />
+            <Route path="activities" element={<ActivitiesPublic />} />
+            <Route path="/members" element={<MembersPublic />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/reset-pw" element={<ResetPassword />} />
             <Route path="/change-pw" element={<ChangePassword />} />

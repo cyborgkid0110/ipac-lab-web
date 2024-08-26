@@ -150,39 +150,48 @@ const getDesignTokens = (mode) => ({
       fontSize: customTheme.typography.pxToRem(48),
       fontWeight: 600,
       lineHeight: 1.2,
+      letterSpacing: -2,
     },
     h3: {
       fontSize: customTheme.typography.pxToRem(42),
       lineHeight: 1.2,
+      letterSpacing: -1,
     },
     h4: {
       fontSize: customTheme.typography.pxToRem(36),
       fontWeight: 500,
       lineHeight: 1.5,
+      letterSpacing: -0.5,
     },
     h5: {
       fontSize: customTheme.typography.pxToRem(20),
       fontWeight: 600,
+      letterSpacing: -0.5,
     },
     h6: {
       fontSize: customTheme.typography.pxToRem(18),
     },
     subtitle1: {
       fontSize: customTheme.typography.pxToRem(18),
+      letterSpacing: -0.5,
     },
     subtitle2: {
       fontSize: customTheme.typography.pxToRem(16),
+      letterSpacing: -0.5,
     },
     body1: {
       fontSize: customTheme.typography.pxToRem(15),
+      letterSpacing: -0.5,
       fontWeight: 400,
     },
     body2: {
       fontSize: customTheme.typography.pxToRem(14),
+      letterSpacing: -0.5,
       fontWeight: 400,
     },
     caption: {
       fontSize: customTheme.typography.pxToRem(12),
+      letterSpacing: -0.5,
       fontWeight: 400,
     },
   },

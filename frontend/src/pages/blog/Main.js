@@ -3,10 +3,22 @@ import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import Markdown from './Markdown';
+import CustomMarkdown from './Markdown';
 
 function Main(props) {
-  const { posts, title } = props;
+  const { post, title } = props;
+  const [postMarkdown, setPostMarkdown] = React.useState('');
+
+  React.useEffect(() => {
+    fetch(post)
+      .then((response) => response.text())
+      .then((text) => {
+        // Logs a string of Markdown content.
+        // Now you could use e.g. <rexxars/react-markdown> to render it.
+        // console.log(text);
+        setPostMarkdown(text);
+      });
+  }, []);
 
   return (
     <Grid
@@ -23,11 +35,9 @@ function Main(props) {
         {title}
       </Typography>
       <Divider />
-      {posts.map((post) => (
-        <Markdown className="markdown" key={post.substring(0, 40)}>
-          {post}
-        </Markdown>
-      ))}
+      <CustomMarkdown className="markdown" key={postMarkdown.substring(0, 40)} >
+        {postMarkdown}
+      </CustomMarkdown>
     </Grid>
   );
 }
