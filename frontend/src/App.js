@@ -168,7 +168,7 @@ const ConditionalRoutes = () => {
 
 function App() {
   return (
-    <Router basename="/frontend">
+    <Router basename="/ipac-lab-web/frontend">
       <ConditionalRoutes />
     </Router>
   );
