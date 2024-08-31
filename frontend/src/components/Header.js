@@ -39,13 +39,30 @@ function Header(props) {
     );
   }
 
+  const TabList = ({isMdUp}) => {
+    if (isMdUp === true) return (
+      <>
+        {sections.map((section) => (
+          <LinkURL key={section.title} to={section.url}>
+            <Link color="inherit" noWrap sx={{ p: 1, flexShrink: 0 }}>
+              <Button variant="large" onClick={() => window.scrollTo(0, 0)}>
+                <Typography variant="h5" color="black">
+                  {section.title}
+                </Typography>
+              </Button>
+            </Link>
+          </LinkURL>
+        ))}
+      </>
+    )
+    else return <></>
+  }
+
   return (
     <React.Fragment>
       <HideOnScroll>
-        {isMdUp ?
-        <Toolbar sx={{
-          backgroundColor: 'transparent',
-        }}>
+        <Toolbar sx={{ backgroundColor: 'transparent',}} style={{ paddingLeft: isMdUp ? 5 : 24}}>
+          {isMdUp ?
           <Box 
             component='img'
             src={logo_lab}
@@ -55,37 +72,31 @@ function Header(props) {
               flexShrink: 0, // Prevent the image from shrinking
             }}
           />
+          : <></>
+          }
           <Typography
             position='relative'
-            textAlign='center'
-            alignSelf='center'
             component="h2"
             variant="h4"
             color="inherit"
-            align="center"
             noWrap
-            sx={{ flex: 1 }}
+            sx={{ 
+              flex: {xs: 1, md: 'none'},  
+              textAlign: {xs: 'center', md: 'left'} 
+            }}
+            pl={1} pr={3}
           >
             {title}
           </Typography>
           {/* <Profile /> */}
+          <TabList isMdUp={isMdUp} />
         </Toolbar>
-        : <></>
-        }
+        {isMdUp ? <></> :
         <Toolbar
           component="nav"
           variant="dense"
           sx={{ justifyContent: 'space-between', overflowX: 'auto' }}
         >
-          <Typography
-            component="h2"
-            variant="h4"
-            color="inherit"
-            align="center"
-            display='none'
-          >
-            {title}
-          </Typography>
           {sections.map((section) => (
             <LinkURL key={section.title} to={section.url}>
               <Link color="inherit" noWrap sx={{ p: 1, flexShrink: 0 }}>
@@ -98,6 +109,7 @@ function Header(props) {
             </LinkURL>
           ))}
         </Toolbar>
+        }
       </HideOnScroll>
     </React.Fragment>
   );

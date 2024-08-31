@@ -14,13 +14,16 @@ export default function MemberCard({ member }) {
         key={`member-id${member.id}`}
         component="img"
         src={member.image}
-        alt='member_pic'
-          sx={{
-            width: '100%',
-            height: '100%',
-            maxWidth: '300px',
-            objectFit: 'cover',
-          }}
+        onError={(e) => {
+          e.target.onerror = null; // Prevent infinite loop in case alternative image fails as well
+          e.target.src = member.image; // Set the alternative image
+        }}
+        sx={{
+          width: '100%',
+          height: '100%',
+          maxWidth: '300px',
+          objectFit: 'cover',
+        }}
       />
       <Typography variant='h5'>{member.name}</Typography>
       <Typography variant='h6' fontWeight='normal'>{member.research_topic}</Typography>
