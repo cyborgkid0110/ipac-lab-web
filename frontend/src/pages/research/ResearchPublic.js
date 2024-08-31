@@ -3,6 +3,7 @@ import { Box, Container, Typography, Grid, Button } from '@mui/material';
 import FeaturedPost from '../blog/FeaturedPost';
 import PageTitle from '../../components/PageTitle';
 import NewsList from '../../components/NewsList';
+import PostTitle from '../../components/PostTitle';
 
 export default function ResearchPublic() {
   const researchTopics = [
@@ -81,23 +82,10 @@ export default function ResearchPublic() {
           abstract='Explore a selection of our recent research on some of the most complex and interesting challenges'
         />
         <Box my={15} />
-        <Grid container display='flex'>
-          <Grid item xs={6}>
-            <Typography variant='h4'>
-              Research areas
-            </Typography>
-            <Typography variant='h6' style={{ color: 'gray' }}>
-              Discover our research fields of the lab
-            </Typography>
-          </Grid>
-          <Grid item xs={6} justifyContent='right' alignContent='center' display='grid'>
-            <Button>
-              <Typography variant='h5' color='primary'>
-                View all research areas
-              </Typography>
-            </Button>
-          </Grid>
-        </Grid>
+        <PostTitle 
+          title='Research areas'
+          abstract='Discover our research field from the lab'
+        />
         <Box my={4} />
         <Grid container spacing={10}>
           {researchTopics.map((post, index) => (
@@ -106,7 +94,7 @@ export default function ResearchPublic() {
             </Grid>
           ))}
         </Grid>
-        <Box my={10} />
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />
         <NewsList 
           title='Publications'
           abstract='Explore a selection of our recent research on some of the most complex and interesting challenges'
@@ -114,7 +102,7 @@ export default function ResearchPublic() {
           posts={publications}
           numberOfPosts={publications.length}
         />
-        <Box my={10} />  
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />  
       </Container>
     </main>
   );

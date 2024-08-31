@@ -71,7 +71,7 @@ export default function ActivitiesPublic() {
             <Typography variant='h6' textAlign='center' my={4}>Description event 2</Typography>
           </Grid>
         </Grid>
-        <Box my={10} />
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />
         <NewsList 
           title='Activities'
           abstract='Discover our latest news from the lab'
@@ -79,7 +79,7 @@ export default function ActivitiesPublic() {
           type='activity'
           numberOfPosts={activities.length}
         />
-        <Box my={10} /> 
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} /> 
       </Container>
     </main>
   );

@@ -6,12 +6,14 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { Link as LinkURL } from 'react-router-dom';
 import Profile from './Profile';
-import { AppBar, Slide, useScrollTrigger } from '@mui/material';
+import { AppBar, Box, Slide, useMediaQuery, useScrollTrigger } from '@mui/material';
 import { useTheme } from '@emotion/react';
+import logo_lab from '../pic/logo_lab.png'
 
 function Header(props) {
   const theme = useTheme();
   const { sections, title } = props;
+  const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
 
   function HideOnScroll(props) {
     const { children } = props;
@@ -40,13 +42,23 @@ function Header(props) {
   return (
     <React.Fragment>
       <HideOnScroll>
+        {isMdUp ?
         <Toolbar sx={{
           backgroundColor: 'transparent',
         }}>
-          <Button size="small">
-            <Typography variant="h6">Icon</Typography>
-          </Button>
+          <Box 
+            component='img'
+            src={logo_lab}
+            sx={{
+              objectFit: 'cover',
+              maxWidth: '80px',
+              flexShrink: 0, // Prevent the image from shrinking
+            }}
+          />
           <Typography
+            position='relative'
+            textAlign='center'
+            alignSelf='center'
             component="h2"
             variant="h4"
             color="inherit"
@@ -56,17 +68,28 @@ function Header(props) {
           >
             {title}
           </Typography>
-          <Profile />
+          {/* <Profile /> */}
         </Toolbar>
+        : <></>
+        }
         <Toolbar
           component="nav"
           variant="dense"
           sx={{ justifyContent: 'space-between', overflowX: 'auto' }}
         >
+          <Typography
+            component="h2"
+            variant="h4"
+            color="inherit"
+            align="center"
+            display='none'
+          >
+            {title}
+          </Typography>
           {sections.map((section) => (
             <LinkURL key={section.title} to={section.url}>
               <Link color="inherit" noWrap sx={{ p: 1, flexShrink: 0 }}>
-                <Button variant="large">
+                <Button variant="large" onClick={() => window.scrollTo(0, 0)}>
                   <Typography variant="h5" color="black">
                     {section.title}
                   </Typography>

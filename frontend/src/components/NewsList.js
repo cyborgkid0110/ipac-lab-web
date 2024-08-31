@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Box, Typography, Grid, Button, List } from '@mui/material';
 import NewsItem from './NewsItem';
+import PostTitle from './PostTitle';
 
 export default function NewsList({ title, abstract, type, numberOfPosts, posts}) {
   const typeLabel = (type) => {
@@ -11,14 +12,7 @@ export default function NewsList({ title, abstract, type, numberOfPosts, posts})
 
   return (
     <>
-      <Grid container display='flex'>
-        <Grid item xs={12}>
-          <Typography variant='h4'>{title}</Typography>
-          <Typography variant='h6' style={{ color: 'gray' }}>
-            {abstract}
-          </Typography>
-        </Grid>
-      </Grid>
+      <PostTitle title={title} abstract={abstract} />
       <Box my={8} />
       <Typography variant='h6' my={1} fontSize='12px' style={{ color: 'gray' }}>{`${numberOfPosts} ${typeLabel(type)}`}</Typography>
       <List>
@@ -28,10 +22,15 @@ export default function NewsList({ title, abstract, type, numberOfPosts, posts})
       </List>
       <Box my={3} />  
       <Grid container justifyContent='center'>
-        <Button color='primary' variant='contained' sx={{
+        <Button variant='contained' sx={{
           fontSize: '18px',
           padding: 3,
-          borderRadius: 3
+          borderRadius: 3,
+          backgroundColor: '#1a73e8',
+          backgroundImage: 'none',
+          ':hover': {
+            backgroundColor: '#2975CA',
+          },
         }}
         >
           Load more

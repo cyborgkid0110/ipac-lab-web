@@ -13,8 +13,7 @@ const images = [
 function ImageSlider({ size }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [buttonRadius, setButtonRadius] = useState({});
-  const [offset, setOffset] = useState(0);
-  const [iconSize, setIconSize] = useState(0);
+  const [offset, setOffset] = useState({});
 
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) =>
@@ -35,17 +34,20 @@ function ImageSlider({ size }) {
     trackMouse: true, // Enable swipe on mouse events as well
   });
 
-  const buttonSize = (size) => {
-    if (size === 'large') return {xs: '4rem', md: '5rem'};
-    else if (size === 'medium') return {xs: '3rem', md: '4rem'};
-    else return {xs: '2rem', md: '3rem'};
-  }
-
-  const offsetvalue = (size) => {
-    if (size === 'large') return -40;
-    else if (size === 'medium') return {xs: -24, md: -36};
-    else return {xs: -16, md: -24};
-  }
+  React.useLayoutEffect(() => {
+    if (size === 'large') {
+      setButtonRadius({xs: '3rem', sm: '4rem', md: '5rem'});
+      setOffset({xs: -24, sm: -32, md: -40});
+    }
+    else if (size === 'medium') {
+      setButtonRadius({xs: '2.5rem', sm: '3rem', md: '4rem'});
+      setOffset({xs: -20, sm: -24, md: -32});
+    }
+    else {
+      setButtonRadius({xs: '2rem', sm: '2.5rem', md: '3rem'});
+      setOffset({xs: -16, sm: -20, md: -24});
+    }
+  },[size])
 
   return (
     <Box
@@ -65,7 +67,6 @@ function ImageSlider({ size }) {
           overflow: 'hidden',
           borderRadius: 2,
           margin: 'auto',
-          overflow: 'hidden',
           touchAction: 'none', // Prevent scroll interference
         }}
       >
@@ -101,7 +102,7 @@ function ImageSlider({ size }) {
           onClick={handlePrevious}
           sx={{
             position: 'absolute',
-            left: offsetvalue,
+            left: offset,
             top: '50%',
             transform: 'translateY(-50%)',
             backgroundColor: 'rgba(255, 255, 255, 0.5)',
@@ -110,8 +111,8 @@ function ImageSlider({ size }) {
             },
             borderRadius: '50%',
             border: '1px solid #bcc1c9',
-            width: buttonSize(size),
-            height: buttonSize(size),
+            width: buttonRadius,
+            height: buttonRadius,
           }}
         >
           <NavigateBeforeIcon sx={{ fontSize: '2.5rem', color: 'black' }} />
@@ -120,7 +121,7 @@ function ImageSlider({ size }) {
           onClick={handleNext}
           sx={{
             position: 'absolute',
-            right: offsetvalue,
+            right: offset,
             top: '50%',
             transform: 'translateY(-50%)',
             backgroundColor: 'rgba(255, 255, 255, 0.5)',
@@ -129,8 +130,8 @@ function ImageSlider({ size }) {
             },
             borderRadius: '50%',
             border: '1px solid #bcc1c9',
-            width: buttonSize(size),
-            height: buttonSize(size)
+            width: buttonRadius,
+            height: buttonRadius
           }}
         >
           <NavigateNextIcon sx={{ fontSize: '2.5rem', color: 'black' }} />

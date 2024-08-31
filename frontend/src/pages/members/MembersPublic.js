@@ -1,10 +1,17 @@
 import * as React from 'react';
-import { Box, Container, Grid, Stack, Typography } from '@mui/material';
+import { Box, Container, Divider, Grid, Stack, Typography } from '@mui/material';
 import PageTitle from '../../components/PageTitle';
 import MemberCard from './MemberCard';
+import { navigateTo } from '../../components/navigateTo';
+import { useNavigate } from 'react-router-dom';
+import RegistrationButton from './RegistrationButton';
 
 export default function MembersPublic() {
-  const [memberData, setMemberData] = React.useState({alumni: [], supervisor: [], smartFarm: [], smartBiogas: [], agv: []})
+  const navigate = useNavigate();
+  const [memberData, setMemberData] = React.useState({alumni: [], supervisor: [], member: []})
+  const [alumni, setAlumni] = React.useState(0);
+  const [supervisor, setSupervisor] = React.useState(0);
+  const [activeMember, setActiveMember] = React.useState(0);
 
   const members = [
     {
@@ -85,33 +92,33 @@ export default function MembersPublic() {
     let result = {
       alumni: [],
       supervisor: [],
-      smartFarm: [],
-      smartBiogas: [],
-      agv: []
+      member: []
     };
+
+    let alumni_count = 0;
+    let member_count = 0;
+    let supervisor_count = 0;
 
     members.forEach(member => {
       // Check position for Alumni
       if (member.position.toLowerCase() === 'alumni') {
-          result.alumni.push(member);
+				result.alumni.push(member);
+				alumni_count++;
       }
       // Check position for Supervisor
-      if (member.position.toLowerCase() === 'supervisor') {
-          result.supervisor.push(member);
+      else if (member.position.toLowerCase() === 'supervisor') {
+				result.supervisor.push(member);
+				supervisor_count++;
       }
-      // Check research_topic for Smart Farm
-      if (member.research_topic.toLowerCase() === 'smart farm') {
-          result.smartFarm.push(member);
-      }
-      // Check research_topic for Smart Biogas
-      if (member.research_topic.toLowerCase() === 'smart biogas') {
-          result.smartBiogas.push(member);
-      }
-      // Check research_topic for AGV
-      if (member.research_topic.toLowerCase() === 'agv') {
-          result.agv.push(member);
+      else {
+				result.member.push(member);
+				member_count++;
       }
     });
+
+    setAlumni(alumni_count);
+    setActiveMember(member_count);
+    setSupervisor(supervisor_count);
     
     return result;
   }
@@ -133,35 +140,60 @@ export default function MembersPublic() {
           title='Members'
           abstract='Meet the IPAC Lab team with dedicated researchers united by their passion for learning and discovery.'
         />
-        <Box my={10} />
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />
+				<Container 
+					maxWidth='false'
+					sx={{ maxWidth: '900px'}}
+					style={{ paddingLeft: 0, paddingRight: 0}}
+				>
+					<Stack
+						sx={{
+							flexDirection: {xs: 'column', md: 'row'},
+							alignItems: {xs: 'center', md: 'flex-start'},
+							gap: {xs: 5, md: 15, lg: 20}
+						}}
+						justifyContent="center"
+						divider={<Divider orientation="vertical" flexItem />}
+					>
+						<Stack direction="column" justifyContent="flex-start" alignItems="center" spacing={2}>
+							<Typography variant='h5'>Supervisor</Typography>
+							<Typography variant='h2'>{supervisor}</Typography>
+						</Stack>
+						<Stack direction="column" justifyContent="flex-start" alignItems="center" spacing={2}>
+							<Typography variant='h5'>Members</Typography>
+							<Typography variant='h2'>{activeMember}</Typography>
+						</Stack>
+						<Stack direction="column" justifyContent="flex-start" alignItems="center" spacing={2}>
+							<Typography variant='h5'>Alumni</Typography>
+							<Typography variant='h2'>{alumni}</Typography>
+						</Stack>
+					</Stack>
+					<Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />
+					<RegistrationButton onClick={() => navigateTo(navigate, '/members/registration')} />
+				</Container>
+        <Box my={10}/>
+				{/* Member card */}
         <Typography variant='h4' textAlign='center' my={4}>Supervisor</Typography>
         <Grid container spacing={4} justifyContent='center'>
           {memberData.supervisor.map((member) => (
             <MemberCard member={member} />
           ))}
         </Grid>
-        <Box my={10} />
-        <Typography variant='h4' textAlign='center' my={4}>Smart Farm</Typography>
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />
+        <Typography variant='h4' textAlign='center' my={4}>Current members</Typography>
         <Grid container spacing={4} justifyContent='center'>
-          {memberData.smartFarm.map((member) => (
+          {memberData.member.map((member) => (
             <MemberCard member={member} />
           ))}
         </Grid>
-        <Box my={10} />
-        <Typography variant='h4' textAlign='center' my={4}>Smart Biogas</Typography>
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />
+        <Typography variant='h4' textAlign='center' my={4}>Alumni</Typography>
         <Grid container spacing={4} justifyContent='center'>
-          {memberData.smartBiogas.map((member) => (
+          {memberData.alumni.map((member) => (
             <MemberCard member={member} />
           ))}
         </Grid>
-        <Box my={10} />
-        <Typography variant='h4' textAlign='center' my={4}>AGV Group</Typography>
-        <Grid container spacing={4} justifyContent='center'>
-          {memberData.agv.map((member) => (
-            <MemberCard member={member} />
-          ))}
-        </Grid>
-        <Box my={10} />
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />
       </Container>
     </main>
   );

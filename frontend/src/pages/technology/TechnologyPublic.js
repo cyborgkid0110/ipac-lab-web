@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Container, Grid, Typography } from '@mui/material';
+import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import TechnologyPost from '../blog/TechnologyPost';
 import TechnologyBanner from './TechnologyBanner';
 import PageTitle from '../../components/PageTitle';
@@ -59,7 +59,23 @@ export default function TechnologyPublic() {
             <TechnologyPost key={technology.title} post={technology} />
           </Grid>
         </Grid>
-        <Box my={10} />
+        <Box pt={5} />
+        <Grid container justifyContent='center'>
+          <Button variant='contained' sx={{
+            fontSize: '18px',
+            padding: 3,
+            borderRadius: 3,
+            backgroundColor: '#1a73e8',
+            backgroundImage: 'none',
+            ':hover': {
+              backgroundColor: '#2975CA',
+            },
+          }}
+          >
+            Load more
+          </Button>
+        </Grid>
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />
       </Container>
     </main>
   );

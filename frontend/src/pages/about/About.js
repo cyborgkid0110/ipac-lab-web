@@ -34,12 +34,12 @@ export default function About() {
         sx={{ maxWidth: '1296px'}}
         style={{ paddingLeft: 24, paddingRight: 24}}
       >
-        <Box my={10} />
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />
         <Typography textAlign='center' variant='h6' fontSize='12px' style={{ color: 'gray' }}>OUR MISSION</Typography>
         <Typography textAlign='center' variant='h2' fontWeight='normal'>
           Fill main mission or slogan of the team
         </Typography>
-        <Box my={10} />
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />
         <Container 
           maxWidth='false'
           sx={{ maxWidth: '616px'}}
@@ -65,7 +65,7 @@ export default function About() {
             Dr. Hoang Duc Chinh - Supervisor of IPAC Lab
           </Typography>
         </Container>
-        <Box my={10} />
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />
         <Stack
           sx={{
             flexDirection: {xs: 'column', md: 'row'},
@@ -94,7 +94,7 @@ export default function About() {
             <Typography variant='h2'>10</Typography>
           </Stack>
         </Stack>
-        <Box my={10} />
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />
         <PageTitle title='Research areas' abstract='Discover our research fields of the lab' />
         <Box my={4} />
         <Grid container spacing={10}>
@@ -115,7 +115,7 @@ export default function About() {
             Load more
           </Button>
         </Grid>
-        <Box my={10} />
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />
         <Typography variant='h3' textAlign='center'>Spotlight</Typography>
         <Box my={4} />
         <Grid container spacing={10}>
@@ -128,7 +128,7 @@ export default function About() {
             <Typography variant='h6' textAlign='center' my={4}>Description event 2</Typography>
           </Grid>
         </Grid>
-        <Box my={10} />
+        <Box sx={{paddingTop: {xs: '64px', md: '80px'}}} />
       </Container>
     </main>
   );

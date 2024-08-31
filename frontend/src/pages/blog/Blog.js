@@ -1,90 +1,17 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import XIcon from '@mui/icons-material/X';
-import MainFeaturedPost from './MainFeaturedPost';
 import FeaturedPost from './FeaturedPost';
-import Main from './Main';
-import Sidebar from './Sidebar';
-import post1 from './blog-post.1.md';
-import post2 from './blog-post.2.md';
-import post3 from './blog-post.3.md';
 import Banner from './Banner';
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Divider, Stack, Typography } from '@mui/material';
 import TechnologyPost from './TechnologyPost';
 import { useNavigate } from 'react-router-dom';
-
-const mainFeaturedPost = {
-  title: 'Title of a longer featured blog post',
-  description:
-    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-  image: 'https://picsum.photos/1100/350',
-  imageText: 'main image description',
-  linkText: 'Continue reading…',
-};
-
-const featuredPosts = [
-  {
-    title: 'Featured post',
-    date: 'Nov 12, 2024',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://picsum.photos/1600/900',
-    imageLabel: 'Image Text',
-  },
-  {
-    title: 'Post title',
-    date: 'Nov 11, 2024',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://picsum.photos/1600/900',
-    imageLabel: 'Image Text',
-  },
-  {
-    title: 'Post title',
-    date: 'Nov 11, 2024',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://picsum.photos/1600/900',
-    imageLabel: 'Image Text',
-  },
-];
-
-const technology = {
-  title: 'Technology post',
-  description:
-    'This is a wider card with supporting text below as a natural lead-in to additional content.',
-  image: 'https://picsum.photos/1600/900',
-}
-
-const posts = [post1, post2, post3];
-
-const sidebar = {
-  title: 'About',
-  description:
-    'Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.',
-  archives: [
-    { title: 'March 2020', url: '#' },
-    { title: 'February 2020', url: '#' },
-    { title: 'January 2020', url: '#' },
-    { title: 'November 1999', url: '#' },
-    { title: 'October 1999', url: '#' },
-    { title: 'September 1999', url: '#' },
-    { title: 'August 1999', url: '#' },
-    { title: 'July 1999', url: '#' },
-    { title: 'June 1999', url: '#' },
-    { title: 'May 1999', url: '#' },
-    { title: 'April 1999', url: '#' },
-  ],
-  social: [
-    { name: 'GitHub', icon: GitHubIcon },
-    { name: 'X', icon: XIcon },
-    { name: 'Facebook', icon: FacebookIcon },
-  ],
-};
+import PostTitle from '../../components/PostTitle';
+import ImageSlider from '../../components/ImageSlider';
+import { navigateTo } from '../../components/navigateTo';
+import RegistrationButton from '../members/RegistrationButton';
 
 export default function Blog() {
+  const navigate = useNavigate();
   const post = {
     title: 'Welcome to IPAC Lab!',
     description:
@@ -92,78 +19,188 @@ export default function Blog() {
     image: 'https://picsum.photos/1920/1080',
   };
 
-  const navigate = useNavigate();
+  const technology = [
+    {
+      title: 'Technology post 1',
+      description:
+        'This is a wider card with supporting text below as a natural lead-in to additional content.',
+      image: 'https://picsum.photos/1600/900',
+    },
+    {
+      title: 'Technology post 2',
+      description:
+        'This is a wider card with supporting text below as a natural lead-in to additional content.',
+      image: 'https://picsum.photos/1920/1080',
+    }
+  ]
+
+  const researchTopics = [
+    {
+      title: 'Smart Building and Smart Grid',
+      image: 'https://picsum.photos/1600/900',
+      description: 'Smart buildings and grids use advanced technologies to optimize energy efficiency, sustainability, and connectivity in urban infrastructure.',
+    },
+    {
+      title: 'Data Analysis and Optimization',
+      image: 'https://picsum.photos/1616/909',
+      description: 'Data analysis and optimization involve extracting insights from data and improving decision-making processes to enhance efficiency and performance.',
+    },
+    {
+      title: 'Environmental Friendly Agriculture',
+      image: 'https://picsum.photos/1632/918',
+      description: 'Environmentally friendly agriculture focuses on sustainable farming practices that minimize environmental impact and promote long-term ecological balance.'
+    }
+  ];
 
   return (
     <main>
-      {/*    */}
+      {/*  Banner  */}
       <Banner post={post}/>
-      <Box my={4} />
-      <Container 
-        maxWidth='false'
-        sx={{ maxWidth: '1296px'}}
-        // style={{ paddingLeft: 24, paddingRight: 24}}
-      >
-        <Grid container display='flex'>
-          <Grid item xs={6}>
-            <Typography variant='h4'>
-              Latest News
-            </Typography>
-            <Typography variant='h6'>
-              Discover our latest AI breakthroughs and updates from the lab
-            </Typography>
+      <Box sx={{
+        paddingTop: {xs: '64px', md: '80px'}
+      }} />
+        <Typography textAlign='center' variant='h6' fontSize='12px' style={{ color: 'gray' }}>OUR MISSION</Typography>
+        <Typography px={1} textAlign='center' variant='h2' fontWeight='normal'
+          sx={{
+            fontSize: {xs: 40, md: 48}
+          }}
+        >
+          Fill main mission or slogan of the team
+        </Typography>
+        <Box sx={{
+          paddingTop: {xs: '64px', md: '80px'}
+        }} />
+        <Container 
+          maxWidth='false'
+          sx={{ maxWidth: '616px'}}
+          style={{ paddingLeft: 24, paddingRight: 24}}
+        >
+          <Typography variant='h6' fontSize='36px' my={2}>Our vision</Typography>
+          <Typography variant='h6' fontSize='16px' my={2} style={{ color: 'gray'}}>
+            Fill what is goal and desired achievement here?
+          </Typography>
+          <Typography variant='h6' fontSize='16px' my={2} style={{ color: 'gray'}}>
+            We live in an exciting time when AI research and technology are delivering extraordinary advances.
+          </Typography>
+          <Typography variant='h6' fontSize='16px' my={2} style={{ color: 'gray'}}>
+            In the coming years, AI — and ultimately artificial general intelligence (AGI) — has the potential to drive one of the greatest transformations in history.
+          </Typography>
+          <Typography variant='h6' fontSize='16px' my={2} style={{ color: 'gray'}}>
+            We're a team of scientists, engineers, ethicists and more, working to build the next generation of AI systems safely and responsibly.
+          </Typography>
+          <Typography variant='h6' fontSize='16px' my={2} style={{ color: 'gray'}}>
+            By solving some of the hardest scientific and engineering challenges of our time, we're working to create breakthrough technologies that could advance science, transform work, serve diverse communities — and improve billions of people.
+          </Typography>
+          <Typography variant='h6' fontSize='13px' my={2} style={{ color: 'gray'}} textAlign='right'>
+            Dr. Hoang Duc Chinh - Supervisor of IPAC Lab
+          </Typography>
+        </Container>
+        <Box sx={{
+          paddingTop: {xs: '64px', md: '80px'}
+        }} />
+        <Container 
+          maxWidth='false'
+          sx={{ maxWidth: '1296px'}}
+          style={{ paddingLeft: 24, paddingRight: 24}}
+        >
+          <Stack
+            sx={{
+              flexDirection: {xs: 'column', md: 'row'},
+              alignItems: {xs: 'center', md: 'flex-start'},
+              gap: {xs: 5, md: 15, lg: 20}
+            }}
+            justifyContent="center"
+            divider={<Divider orientation="vertical" flexItem />}
+          >
+            <Stack direction="column" justifyContent="flex-start" alignItems="center" spacing={2}>
+              <Button onClick={() => navigateTo(navigate, '/research')}>
+                <Typography variant='h5'>Publications</Typography>
+              </Button>
+              <Typography variant='h2'>100</Typography>
+            </Stack>
+            <Stack direction="column" justifyContent="flex-start" alignItems="center" spacing={2}>
+              <Button onClick={() => navigateTo(navigate, '/members')}>
+                <Typography variant='h5'>Members</Typography>
+              </Button>
+              <Typography variant='h2'>30+</Typography>
+            </Stack>
+            <Stack direction="column" justifyContent="flex-start" alignItems="center" spacing={2}>
+              <Button onClick={() => navigateTo(navigate, '/research')}>
+                <Typography variant='h5'>Research Areas</Typography>
+              </Button>
+              <Typography variant='h2'>10</Typography>
+            </Stack>
+          </Stack>
+          <Box sx={{
+            paddingTop: {xs: '64px', md: '80px'}
+          }} />
+          <Container 
+            maxWidth='false'
+            sx={{ maxWidth: '900px'}}
+            style={{ paddingLeft: 0, paddingRight: 0}}
+          >
+            <RegistrationButton onClick={() => navigateTo(navigate, '/members/registration')} />
+          </Container>
+          {/* Research area */}
+          <Box sx={{
+            paddingTop: {xs: '64px', md: '80px'}
+          }} />
+          <PostTitle
+            title='Research areas'
+            abstract='Discover our research fields of the lab'
+            navText='View all research areas'
+            navigatePath='/research'
+          />
+          <Box my={4} />
+          <Grid container spacing={10}>
+            {researchTopics.map((post, index) => (
+              <Grid item xs={12} md={4}>
+                <FeaturedPost key={index} post={post} />
+              </Grid>
+            ))}
           </Grid>
-          <Grid item xs={6} justifyContent='right' alignContent='center' display='grid'>
-            <Button onClick={() => navigate('/activities')}>
-              <Typography variant='h5' color='primary'>
-                View all posts
+          <Box sx={{
+            paddingTop: {xs: '64px', md: '80px'}
+          }} />
+          <Typography variant='h3' textAlign='center'>Technologies</Typography>
+          <Typography variant='h4' fontWeight='normal' py={1} fontSize='30px' textAlign='center'>Breakthrough research. Transformative products.</Typography>
+          <Grid container justifyContent='center'>
+            <Button>
+              <Typography variant='h5' color='primary' onClick={() => navigateTo(navigate, '/technology')}>
+                View all technologies
               </Typography>
             </Button>
           </Grid>
-        </Grid>
-        <Box my={4} />
-        <Grid container spacing={10}>
-          {featuredPosts.map((post) => (
-            <Grid item xs={12} md={4}>
-              <FeaturedPost key={post.title} post={post} />
+          <Box sx={{
+            paddingTop: {xs: '64px', md: '80px'}
+          }} />
+          <Grid container spacing={10}>
+            <Grid item xs={12} md={6}>
+              <TechnologyPost key={technology.title} post={technology[0]} />
             </Grid>
-          ))}
-        </Grid>
-        <Box my={10} />
-        <Typography variant='h3' textAlign='center'>Technologies</Typography>
-        <Typography variant='h4' fontWeight='normal' py={1} fontSize='30px' textAlign='center'>Breakthrough research. Transformative products.</Typography>
-        <Grid container justifyContent='center'>
-          <Button>
-            <Typography variant='h5' color='primary' onClick={() => navigate('/technology')}>
-              View all technologies
-            </Typography>
-          </Button>
-        </Grid>
-        <Box my={10} />
-        <Grid container spacing={10}>
-          <Grid item xs={12} md={6}>
-            <TechnologyPost key={technology.title} post={technology} />
+            <Grid item xs={12} md={6}>
+              <TechnologyPost key={technology.title} post={technology[1]} />
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <TechnologyPost key={technology.title} post={technology} />
+          <Box sx={{
+            paddingTop: {xs: '64px', md: '80px'}
+          }} />
+          <Typography variant='h3' textAlign='center'>Spotlight</Typography>
+          <Box my={4} />
+          <Grid container spacing={10}>
+            <Grid item xs={12} md={6}>
+              <ImageSlider size='medium' />
+              <Typography variant='h6' textAlign='center' my={4}>Description event 1</Typography>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <ImageSlider size='medium' />
+              <Typography variant='h6' textAlign='center' my={4}>Description event 2</Typography>
+            </Grid>
           </Grid>
-        </Grid>
-        <Box my={10} />
-
-        <Grid container spacing={5}>
-          <Grid item xs={8}>
-          </Grid>
-          {/* <Main title="From the firehose" post={post1} />
-          <Main title="From the firehose" post={post2} />
-          <Main title="From the firehose" post={post3} /> */}
-          {/* <Sidebar
-            title={sidebar.title}
-            description={sidebar.description}
-            archives={sidebar.archives}
-            social={sidebar.social}
-          /> */}
-        </Grid>
-      </Container>
+          <Box sx={{
+            paddingTop: {xs: '64px', md: '80px'}
+          }} />
+        </Container>
     </main>
   );
 }
